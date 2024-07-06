@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     
 </head>
 <body>
     <div id="container">
         <div id="calculator">
-            <h1>Calculator:</h1>
+            <h1>Khansaar ka Calculator:</h1>
             <textarea id="display" value='0' readonly></textarea>
             <div id="keys" tabindex="0">
                 <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
@@ -30,7 +32,8 @@
                 <button onclick="appendToDisplay('0')">0</button>
                 <button onclick="calculate()" class="equal-btn">=</button>
                 <button onclick="appendToDisplay('%')" class="operator-btn">%</button>
-                <button onclick="clearDisplay()" class="clear-btn">CLEAR</button>
+                <button onclick="clearDisplay()" class="operator-btn">AC</button>
+                <button onclick="backSpace()" class="operator-btn"><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
             </div>
         </div>
     </div>

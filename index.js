@@ -36,7 +36,10 @@ function calculate() {
         isOperatorLast = false;
     }
 }    
-
+function backSpace(){
+    display.value = display.value.slice(0, -1);
+    
+}
 
 document.addEventListener("keydown", function(event) {
     const key = event.key;
