@@ -26,7 +26,8 @@ function clearDisplay() {
 
 function calculate() {
     try {
-        display.value = eval(display.value);
+        let expression = display.value.replace(/%/g, '*0.01*');
+        display.value = eval(expression);
         lastActionWasCalculate = true;
         isOperatorLast = false;
     } catch (error) {
@@ -34,7 +35,8 @@ function calculate() {
         lastActionWasCalculate = true;
         isOperatorLast = false;
     }
-}
+}    
+
 
 document.addEventListener("keydown", function(event) {
     const key = event.key;
