@@ -1,17 +1,19 @@
 const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
+const  setCode="2-8-2002";
 
 function appendToDisplay(input) {
     if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
         display.value = input;
         lastActionWasCalculate = false;
         isOperatorLast = false;
+
     } else if (lastActionWasCalculate && '+-*/%'.includes(input)) {
         display.value += input;
         lastActionWasCalculate = false;
         isOperatorLast = true;
-    
+
     } else {
         display.value += input;
         //isOperatorLast = '+-*/'.includes(input);
@@ -25,6 +27,11 @@ function clearDisplay() {
 }
 
 function calculate() {
+    if (display.value === setCode){
+        window.location.href= "Message.html";
+        return;
+    }
+
     try {
         let expression = display.value.replace(/%/g, '*0.01*');
         display.value = eval(expression);
