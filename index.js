@@ -1,10 +1,12 @@
 const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
-const  setCode="2-8-2002";
+const setMessage = JSON.parse(localStorage.getItem('setMessage')) || {};
+const  setCode="22-08-2001";
 
 function appendToDisplay(input) {
-    if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
+  
+    if ((display.value === '0' || lastActionWasCalculate ) && !isOperatorLast && !'+-*/%'.includes(input)) {
         display.value = input;
         lastActionWasCalculate = false;
         isOperatorLast = false;
@@ -27,13 +29,20 @@ function clearDisplay() {
 }
 
 function calculate() {
-    if (display.value === setCode){
-        window.location.href= "Message.html";
+    const inputValue = display.value;
+    if (inputValue === setCode){
+        document.getElementById("calculator").style.display = "none";
+        document.getElementById("admin").style.display = "block";
+        return;
+    }
+
+    if (setMessage[inputValue]){
+        display.value = setMessage[inputValue];
         return;
     }
 
     try {
-        let expression = display.value.replace(/%/g, '*0.01*');
+        let expression = inputValue.replace(/%/g, '*0.01*');
         display.value = eval(expression);
         lastActionWasCalculate = true;
         isOperatorLast = false;
@@ -42,7 +51,42 @@ function calculate() {
         lastActionWasCalculate = true;
         isOperatorLast = false;
     }
-}    
+}   
+
+function adminSetMessage(){
+    const birthday = document.getElementById("adminBirthdayInput").value;
+    const message = document.getElementById("adminMessageInput").value;
+
+    if (birthday && message){
+        setMessage[birthday] = message;
+        localStorage.setItem('setMessage', JSON.stringify(setMessage));
+        alert("Message Updated");
+
+        document.getElementById("adminBirthdayInput").value = '';
+        document.getElementById("adminMessageInput").value = '';
+
+    } else {
+        alert("Enter Date of Birth and Message too");
+    }
+}
+
+function closeAdminSection(){
+    document.getElementById("admin").style.display = "none";
+    document.getElementById("calculator").style.display = "block";
+}
+
+function viewMessage(){
+    const birthday = document.getElementById("userBirthdayinput").value;
+    const messageOutput = document.getElementById("messageOutput");
+
+    if (setMessage[birthday]){
+        messageOutput.textContent = setMessage[birthday];
+
+    } else {
+        messageOutput.textContent = "Hey Buddy,No message set for you..."
+    }
+}
+
 function backSpace(){
     display.value = display.value.slice(0, -1);
     

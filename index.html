@@ -37,6 +37,17 @@
             </div>
         </div>
     </div>
+    <div id ="admin" style="display: none;">
+        <h1>Give Message:</h1>
+        <input type id="adminBirthdayInput" placeholder="What's the date ?">
+        <textarea id="adminMessageInput" placeholder="Give the Message"></textarea>
+        <button onclick="adminSetMessage()" class="msg-btn">Go head</button>
+        <h1>View Message</h1>
+        <input type="text" id="userBirthdayinput" placeholder="What's the date ?"/>
+        <button onclick="viewMessage()" class="msg-btn">Read</button>
+        <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
+        <p id="messageOutput"></p>
+    </div>
     <script src="index.js"></script>
     <script>
         document.getElementById("display").focus();
