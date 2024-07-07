@@ -6,20 +6,21 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
     <div id="container">
         <div id="calculator">
-            <h1>When you born ?</h1>
-            <textarea id="display" value='0' readonly></textarea>
+            <h1>When you born?</h1>
+            <textarea id="display" readonly>0</textarea>
             <div id="keys" tabindex="0">
                 <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
                 <button onclick="appendToDisplay('7')">7</button>
                 <button onclick="appendToDisplay('8')">8</button>
                 <button onclick="appendToDisplay('9')">9</button>
-                <button onclick="appendToDisplay('-' )" class="operator-btn">-</button>
+                <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
                 <button onclick="appendToDisplay('4')">4</button>
                 <button onclick="appendToDisplay('5')">5</button>
                 <button onclick="appendToDisplay('6')">6</button>
@@ -37,20 +38,20 @@
             </div>
         </div>
     </div>
-    <div id ="admin" style="display: none;">
+    <div id="admin" style="display: none;">
         <h1>Give Message:</h1>
-        <input type id="adminBirthdayInput" placeholder="What's the date ?">
+        <input type="text" id="adminBirthdayInput" placeholder="What's the date?">
         <textarea id="adminMessageInput" placeholder="Give the Message"></textarea>
-        <button onclick="adminSetMessage()" class="msg-btn">Go head</button>
+        <button onclick="adminSetMessage()" class="msg-btn">Go ahead</button>
         <h1>View Message</h1>
-        <input type="text" id="userBirthdayinput" placeholder="What's the date ?"/>
+        <input type="text" id="userBirthdayinput" placeholder="What's the date?" />
         <button onclick="viewMessage()" class="msg-btn">Read</button>
         <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
         <p id="messageOutput"></p>
     </div>
-    <script src="index.js"></script>
+    <script src="index1.js"></script>
     <script>
         document.getElementById("display").focus();
     </script>
-</body>    
+</body>
 </html>
