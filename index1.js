@@ -23,21 +23,23 @@ let isOperatorLast = false;
 const setCode = "22-08-2001";
 
 function appendToDisplay(input) {
-    if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
-        display.value = input;
-        lastActionWasCalculate = false;
-        isOperatorLast = false;
-    } else if (lastActionWasCalculate && '+-*/%'.includes(input)) {
-        display.value += input;
-        lastActionWasCalculate = false;
-        isOperatorLast = true;
-    } else {
-        display.value += input;
-        isOperatorLast = '+-*/%'.includes(input);
-        if (lastActionWasCalculate && '+-*/'.includes(input)) {
+    requestAnimationFrame(() => {
+        if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
+            display.value = input;
             lastActionWasCalculate = false;
+            isOperatorLast = false;
+        } else if (lastActionWasCalculate && '+-*/%'.includes(input)) {
+            display.value += input;
+            lastActionWasCalculate = false;
+            isOperatorLast = true;
+        } else {
+            display.value += input;
+            isOperatorLast = '+-*/%'.includes(input);
+            if (lastActionWasCalculate && '+-*/'.includes(input)) {
+                lastActionWasCalculate = false;
+            }
         }
-    }
+    });
 }
 
 function clearDisplay() {
@@ -114,29 +116,33 @@ function backSpace() {
     display.value = display.value.slice(0, -1);
 }
 
+let debounceTimeout;
 document.addEventListener("keydown", function (event) {
-    const key = event.key;
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        const key = event.key;
 
-    if (key === 'Enter') {
-        event.preventDefault(); // Prevent form submission on Enter
-        calculate();
-    }
+        if (key === 'Enter') {
+            event.preventDefault(); // Prevent form submission on Enter
+            calculate();
+        }
 
-    if ((key >= '0' && key <= '9') || key === '.') {
-        appendToDisplay(key);
-    }
+        if ((key >= '0' && key <= '9') || key === '.') {
+            appendToDisplay(key);
+        }
 
-    if (key === '+' || key === '-' || key === '*' || key === '/') {
-        appendToDisplay(key);
-    }
+        if (key === '+' || key === '-' || key === '*' || key === '/') {
+            appendToDisplay(key);
+        }
 
-    if (key === 'Escape') {
-        clearDisplay();
-    }
+        if (key === 'Escape') {
+            clearDisplay();
+        }
 
-    if (key === 'Backspace') {
-        backSpace();
-    }
+        if (key === 'Backspace') {
+            backSpace();
+        }
+    }, 100);
 });
 
 window.appendToDisplay = appendToDisplay;
