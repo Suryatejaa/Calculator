@@ -5,7 +5,7 @@ body{
     align-items: center;
     height: 100vh;
     background-color: hsl(60, 1%, 45%);
-    background-image: url("Elements/calcie.jpg");
+    background-image: url("Elements/Calcie.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,7 +14,7 @@ body{
 
 @media only screen and(max-width: 768px) {
     body {
-        background-image: url('Elements/calcie-mob.jpg') no-repeat center center fixed;
+        background-image: url("Elements/calcie-mob.jpg") no-repeat center center fixed;
         background-size: cover;
     }    
 }
