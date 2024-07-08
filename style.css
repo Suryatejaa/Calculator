@@ -4,8 +4,8 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: hsl(0, 0%, 95%);
-    background-image: url("Elements/bckj-img.jpg");
+    background-color: hsl(176, 43%, 75%);
+    /* background-image: url("Elements/bckj-img.jpg"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
