@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
     <div id="container">
-        <div id="calculator">
+        <div id="calculator" style="display: block;">
             <h1 class="welcome">I'm Caldie,<br> your calculator...</h1>
             <textarea id="display" readonly>0</textarea>
             <div id="keys" tabindex="0">
@@ -37,6 +38,31 @@
                 <button onclick="backSpace()" class="operator-btn"><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
             </div>
         </div>
+        <!-- <div id="login" style="display: none; ">
+            <textarea id="calcie" readonly>I'm Calsie, your buddy... Choose any one\/</textarea>
+            
+            <textarea id="displayLogin" readonly placeholder="">1.SignIN,  2.SignUP</textarea>
+            <div id="keys" tabindex="0">
+                <button id="option" onclick="appendToDisplayLogin('+')" class="operator-btn">+</button>
+                <button id="option" onclick="appendToDisplayLogin('7')">7</button>
+                <button id="option" onclick="appendToDisplayLogin('8')">8</button>
+                <button id="option" onclick="appendToDisplayLogin('9')">9</button>
+                <button id="option" onclick="appendToDisplayLogin('-')" class="operator-btn">-</button>
+                <button id="option" onclick="appendToDisplayLogin('4')">4</button>
+                <button id="option" onclick="appendToDisplayLogin('5')">5</button>
+                <button id="option" onclick="appendToDisplayLogin('6')">6</button>
+                <button id="option" onclick="appendToDisplayLogin('*')" class="operator-btn">*</button>
+                <button id="option" onclick="appendToDisplayLogin('1')">1</button>
+                <button id="option" onclick="appendToDisplayLogin('2')">2</button>
+                <button id="option" onclick="appendToDisplayLogin('3')">3</button>
+                <button  onclick="backSpaceLogin()" class="operator-btn"><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
+                <button id="option" onclick="appendToDisplayLogin('.')">.</button>
+                <button id="option" onclick="appendToDisplayLogin('0')">0</button>
+                <button id="option" onclick="login()" class="equal-btn">=</button>
+                <button  onclick="clearDisplayLogin()" class="operator-btn">AC</button>
+                <button id="option" onclick="closeLogin()" class="equal-btnLogin">Caldie</button>
+            </div>
+        </div> -->
     </div>
     <div id="admin" style="display: none;">
         <h1>Give Message:</h1>
@@ -49,6 +75,21 @@
         <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
         <p id="messageOutput"></p>
     </div>
+
+    <div id="login" style="display: none;">
+        <div id="signInSection">
+            <input type="text" id="existingUser" placeholder="Username">
+            <input type="password" id="existingUserPass" placeholder="Password">
+            <button onclick="signIn()">Sign In</button>
+        </div>
+        <div id="signUpSection">
+            <input type="text" id="newUser" placeholder="New Username">
+            <input type="password" id="newUserPass" placeholder="New Password">
+            <button onclick="signUp()">Sign Up</button>
+        </div>
+        <button onclick="closeLoginSection()">Close Login Section</button>
+    </div>
+
     <script src="index1.js"></script>
     <script>
         document.getElementById("display").focus();

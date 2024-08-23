@@ -30,16 +30,24 @@ function clearDisplay() {
 
 function calculate() {
     const inputValue = display.value;
+    const singnUp = 1;
+    const signIn = 2;
     if (inputValue === setCode){
         document.getElementById("calculator").style.display = "none";
         document.getElementById("admin").style.display = "block";
         return;
     }
 
-    if (setMessage[inputValue]){
-        display.value = setMessage[inputValue];
-        return;
-    }
+    // if (setMessage[inputValue]){
+    //     display.value = setMessage[inputValue];
+    //     return;
+    // }
+
+    database.ref('messages/' + inputValue).once('value').then(function (snapshot) {
+        if (snapshot.exists()) {
+            display.value = snapshot.val();
+            return;
+        }
 
     try {
         let expression = inputValue.replace(/%/g, '*0.01*');
