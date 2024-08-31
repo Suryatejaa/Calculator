@@ -22,9 +22,13 @@ const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
 const setCode = "22-08-2001";
+const operators = '+-*/%';
 
 function appendToDisplay(input) {
     requestAnimationFrame(() => {
+
+        const isOperator = operators.includes(input);
+
         if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
             display.value = input;
             lastActionWasCalculate = false;
@@ -35,6 +39,9 @@ function appendToDisplay(input) {
             isOperatorLast = true;
         } else {
             
+            if (isOperator && isOperatorLast) {
+                display.value = display.value.slice(0, -1);
+            }
 
             display.value += input;
             isOperatorLast = '+-*/%'.includes(input);
@@ -53,6 +60,9 @@ function clearDisplay() {
 
 function calculate() {
     const inputValue = display.value;
+
+    
+
     if (inputValue === setCode) {
         document.getElementById("calculator").style.display = "none";
         document.getElementById("admin").style.display = "block";
