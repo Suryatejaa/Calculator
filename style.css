@@ -9,28 +9,164 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+    transition: background-image 0.5s ease, color 0.5s ease;
+}
+
+body.l{
+    background-image: url("Elements/light_vert.jpg");
 }
 
 @media(max-width: 480px) {
     body {
         /*  background-image: url("Elements/calcie-mog") no-repeat center center fixed; */
         background-size: cover;
-    }    
+    }
     #container{
         max-width: 300px;
         overflow-x  : hidden;
         position: fixed;
     }
-    
+    #outblock{
+        max-width: 320px;
+        display: block;
+        padding-left: 40px;
+        padding-right: 40px;
+        font-size: 10px;
+    }
+    #themebtn{
+        margin-left: 100px;
+        margin-bottom: 50px;
+    }
+    #themebtn.l:hover::after {
+        display: none;
+    }
+    #themebtn:hover::after {
+        display: none;
+    }
+}
+
+@media(min-width: 481px){
+    body{
+        background-image: url("Elements/cal_horg.jpg");
+    }
+    body.l{
+        background-image: url("Elements/light_horg.jpg");
+    }
+    #outblock{
+        max-width: 320px;
+        display: block;
+        font-size: 10px;
+    }
+    #themebtn{
+        margin-left: 120px;
+        margin-bottom: 50px;
+    }
+}
+
+#outblock{
+    position: relative;
+    max-width: 320px;
+    background-color: hsl(60, 1%, 35%);
+    height: 70px;
+    margin-bottom: 10px;
+    border-radius: 15px 15px 15px 0;
+    overflow: hidden;
+    align-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    color: 000;
+    font-family: 'segoe Ui','Courier New', Courier, monospace;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+#outblock.l{
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+#header{
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+}
+#themebtn{
+    width: 30px;
+    height: 30px;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+.tooltip{
+    max-width: fit-content;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    content: "Theme";
+    color: black;
+    padding: 5px;
+    border-radius: 10px 0 10px 10px;
+    display: flex;
+    font-size: 15px;
+    font-weight: 1;
+    margin-top: 30px;
+    margin-left: -50px;
+}
+
+
+#tooltipLight {
+    max-width: fit-content;
+    background: hsl(60, 1%, 44%);
+    content: "Theme";
+    color: black;
+    padding: 5px;
+    border-radius: 10px 0 10px 10px;
+    display: flex;
+    font-size: 15px;
+    font-weight: 1;
+    margin-top: 30px;
+    margin-left: -50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#themebtn:hover{
+    background: rgb(238, 174, 202);
+    background: linear-gradient(313deg, rgb(193, 130, 225) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+#themebtn:active{
+    /* background: hsl(60, 2%, 80%); */
+    background: rgb(238, 174, 202);
+    background: linear-gradient(33deg, rgb(193, 130, 225) 0%, rgba(148, 187, 233, 1) 100%);
+}
+
+#themebtn.l{
+    background: hsl(60, 1%, 44%);
+}
+
+#themebtn.l:hover {
+    background: hsl(60, 1%, 52%);
+}
+
+#themebtn.l:active {
+    width: 30px;
+    height: 30px;
+    background: hsl(40, 2%, 80%);
 }
 
 #calculator{
     font-family: Arial, Helvetica, sans-serif;
     background-color: hsl(60, 1%, 35%);
-    border-radius: 15px;
+    border-radius: 15px 0 15px 15px;
     max-width: 320px;
     overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+#calculator.l{
+    background: rgb(238, 174, 202);
+    background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 #login{
@@ -53,10 +189,14 @@ body{
     text-align: right;
     border: none;
     background-color:  hsl(60, 1%, 25%);
-    color: rgb(1, 1, 1);
     overflow-y: scroll;
     word-wrap: break-word;
     resize: none;
+}
+
+#display.l{
+    background: rgb(222, 174, 238);
+    background: linear-gradient(313deg, rgb(140, 97, 155) 0%, rgb(125, 132, 198) 100%);color: rgb(1, 1, 1);
 }
 
 #displayLogin{
@@ -158,41 +298,88 @@ button{
     height: 60px;
     border-radius: 50px;
     border:none;
-    background-color:  hsl(60, 2%, 80%);;
-    color: hsl(0, 5%, 4%);
-    font-size: 2rem;
+    background-color:  hsl(60, 2%, 80%);
     font-weight: bold;
     cursor: pointer;
+    font-size: 30px;
+}
+
+button.l{
+    background: rgb(101, 184, 230);
+    background: linear-gradient(306deg, rgba(101, 184, 230, 1) 0%, rgba(175, 129, 215, 1) 100%);font-size: 2rem;
+}
+
+button.l:hover{
+    background: rgb(90,162,202);
+    background: linear-gradient(108deg, rgb(87, 149, 182) 0%, rgba(175,129,215,1) 100%);
+}
+
+button.l:active{
+    background: rgb(64,142,186);
+    background: linear-gradient(128deg, rgba(64,142,186,1) 0%, rgba(175,129,215,1) 100%);
 }
 
 .operator-btnLogin{
     margin-left: 0px;
 }
 button:hover{
-    background-color:  hsl(60, 2%, 65%);;
+    background:  hsl(60, 2%, 65%);;
 }
 button:active{
-    background-color:  hsl(60, 2%, 50%);
+    background:  hsl(60, 2%, 50%);
 }
 .operator-btn{
-    background-color: hsl(60, 1%, 26%);
+    background: hsl(60, 1%, 26%);
 }
 .operator-btn:hover{
-    background-color: hsl(60, 1%, 56%);
+    background: hsl(60, 1%, 56%);
 }
 .operator-btn:active{
-    background-color: hsl(60, 1%, 46%);
+    background: hsl(60, 1%, 46%);
 }
-.equal-btn{
+
+.operator-btn.l {
+    background: rgb(42, 142, 160);
+    background: linear-gradient(128deg, rgba(42, 142, 160, 1) 0%, rgba(118, 68, 166, 1) 100%);
+}
+
+.operator-btn.l:hover {
+    background: rgb(53,176,198);
+    background: linear-gradient(128deg, rgba(53,176,198,1) 0%, rgba(151,87,213,1) 100%);
+}
+
+.operator-btn.l:active {
+    background: rgb(36,177,202);
+    background: linear-gradient(128deg, rgba(36,177,202,1) 0%, rgba(139,61,215,1) 100%);
+}
+
+#equal-btn{
     height: 210%;
-    background-color: hsl(0, 0%, 56%);
+    background: hsl(0, 0%, 56%);
 }
-.equal-btn:hover{
-    background-color: hsl(60, 2%, 66%);
+#equal-btn:hover{
+    background: hsl(60, 2%, 66%);
 }
-.equal-btn:active{
-    background-color: hsl(0, 0%, 52%);
+#equal-btn:active{
+    background: hsl(0, 0%, 52%);
 }
+
+
+#equal-btn.l {
+    height: 210%;
+    background: rgb(150, 213, 224);
+    background: linear-gradient(128deg, rgba(150, 213, 224, 1) 0%, rgba(153, 152, 230, 1) 100%);
+}
+
+#equal-btn.l:hover {
+    background: rgb(123, 207, 222);
+    background: linear-gradient(128deg, rgba(123, 207, 222, 1) 0%, rgba(122, 121, 220, 1) 100%);
+}
+#equal-btn.l:active {
+    background: rgb(108, 209, 227);
+    background: linear-gradient(128deg, rgba(108, 209, 227, 1) 0%, rgba(111, 109, 234, 1) 100%);
+}
+
 
 .equal-btnLogin{
     width: 200%;
@@ -205,13 +392,7 @@ button:active{
 .equal-btnL.operator-btnLogin{
     background-color: hsl(0, 0%, 52%);
 }
-/* #Message{
-    display:block;
-    justify-content: center;
-    background-color: bisque;
-    overflow: hidden;
-    height: 70vh;
-    max-width: 500px; */
+
 #Message{
     width: 400px;
     height: 50vh;

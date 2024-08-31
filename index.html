@@ -13,15 +13,21 @@
 </head>
 <body>
     <div id="container">
+        <div id="outblock">
+            <span>'99' will take you to other side of this calculator<span>
+        </div>
         <div id="calculator" style="display: block;">
+            <div id="header">
             <h1 class="welcome">Not just <br> A Calculator...</h1>
+            <button id="themebtn" class="button"></button>
+            </div>
             <textarea id="display" readonly>0</textarea>
             <div id="keys" tabindex="0">
-                <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
-                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('+')"  class="operator-btn">+</button>
+                <button onclick="appendToDisplay('7')" >7</button>
                 <button onclick="appendToDisplay('8')">8</button>
                 <button onclick="appendToDisplay('9')">9</button>
-                <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
+                <button onclick="appendToDisplay('-')"  class="operator-btn">-</button>
                 <button onclick="appendToDisplay('4')">4</button>
                 <button onclick="appendToDisplay('5')">5</button>
                 <button onclick="appendToDisplay('6')">6</button>
@@ -29,40 +35,16 @@
                 <button onclick="appendToDisplay('1')">1</button>
                 <button onclick="appendToDisplay('2')">2</button>
                 <button onclick="appendToDisplay('3')">3</button>
-                <button onclick="appendToDisplay('/')" class="operator-btn">/</button>
+                <button onclick="appendToDisplay('/')"  class="operator-btn" >/</button>
                 <button onclick="appendToDisplay('.')">.</button>
                 <button onclick="appendToDisplay('0')">0</button>
-                <button onclick="calculate()" class="equal-btn">=</button>
-                <button onclick="appendToDisplay('%')" class="operator-btn">%</button>
-                <button onclick="clearDisplay()" class="operator-btn">AC</button>
-                <button onclick="backSpace()" class="operator-btn"><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
+                <button onclick="calculate()"  class="equal-btn" id="equal-btn">=</button>
+                <button onclick="appendToDisplay('%')"  class="operator-btn" >%</button>
+                <button onclick="clearDisplay()"  class="operator-btn" >AC</button>
+                <button onclick="backSpace()"  class="operator-btn" ><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
             </div>
         </div>
-        <!-- <div id="login" style="display: none; ">
-            <textarea id="calcie" readonly>I'm Calsie, your buddy... Choose any one\/</textarea>
-            
-            <textarea id="displayLogin" readonly placeholder="">1.SignIN,  2.SignUP</textarea>
-            <div id="keys" tabindex="0">
-                <button id="option" onclick="appendToDisplayLogin('+')" class="operator-btn">+</button>
-                <button id="option" onclick="appendToDisplayLogin('7')">7</button>
-                <button id="option" onclick="appendToDisplayLogin('8')">8</button>
-                <button id="option" onclick="appendToDisplayLogin('9')">9</button>
-                <button id="option" onclick="appendToDisplayLogin('-')" class="operator-btn">-</button>
-                <button id="option" onclick="appendToDisplayLogin('4')">4</button>
-                <button id="option" onclick="appendToDisplayLogin('5')">5</button>
-                <button id="option" onclick="appendToDisplayLogin('6')">6</button>
-                <button id="option" onclick="appendToDisplayLogin('*')" class="operator-btn">*</button>
-                <button id="option" onclick="appendToDisplayLogin('1')">1</button>
-                <button id="option" onclick="appendToDisplayLogin('2')">2</button>
-                <button id="option" onclick="appendToDisplayLogin('3')">3</button>
-                <button  onclick="backSpaceLogin()" class="operator-btn"><i class="fas fa-backspace" style="font-size: 25px; align-items: center; padding: 7px; padding-right:9px;"></i></button>
-                <button id="option" onclick="appendToDisplayLogin('.')">.</button>
-                <button id="option" onclick="appendToDisplayLogin('0')">0</button>
-                <button id="option" onclick="login()" class="equal-btn">=</button>
-                <button  onclick="clearDisplayLogin()" class="operator-btn">AC</button>
-                <button id="option" onclick="closeLogin()" class="equal-btnLogin">Caldie</button>
-            </div>
-        </div> -->
+        
     </div>
     <div id="admin" style="display: none;">
         <h1>Give Message:</h1>
@@ -90,7 +72,9 @@
         <button onclick="closeLoginSection()">Close Login Section</button>
     </div>
 
+    <script src="/theme.js"></script>
     <script src="index1.js"></script>
+    
     <script>
         document.getElementById("display").focus();
     </script>

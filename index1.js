@@ -17,6 +17,7 @@ database.ref("List/" + "Targets").set({
     state: "alive"
 });
 
+
 const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
@@ -33,6 +34,8 @@ function appendToDisplay(input) {
             lastActionWasCalculate = false;
             isOperatorLast = true;
         } else {
+            
+
             display.value += input;
             isOperatorLast = '+-*/%'.includes(input);
             if (lastActionWasCalculate && '+-*/'.includes(input)) {
@@ -53,6 +56,7 @@ function calculate() {
     if (inputValue === setCode) {
         document.getElementById("calculator").style.display = "none";
         document.getElementById("admin").style.display = "block";
+        document.getElementById("outblock").style.display = "none";
         return;
     }
 
@@ -73,6 +77,7 @@ function calculate() {
             isOperatorLast = false;
         }
     });
+    lastActionWasCalculate = true;
 }
 
 function adminSetMessage() {
@@ -97,6 +102,9 @@ function adminSetMessage() {
 function closeAdminSection() {
     document.getElementById("admin").style.display = "none";
     document.getElementById("calculator").style.display = "block";
+    document.getElementById("outblock").style.display = "block";
+    clearDisplay();
+
 }
 
 function viewMessage() {
@@ -152,3 +160,4 @@ window.adminSetMessage = adminSetMessage;
 window.closeAdminSection = closeAdminSection;
 window.viewMessage = viewMessage;
 window.backSpace = backSpace;
+
