@@ -29,7 +29,7 @@ function appendToDisplay(input) {
 
         const isOperator = operators.includes(input);
 
-        if ((display.value === '0' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
+        if ((display.value === '' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
             display.value = input;
             lastActionWasCalculate = false;
             isOperatorLast = false;
@@ -38,7 +38,7 @@ function appendToDisplay(input) {
             lastActionWasCalculate = false;
             isOperatorLast = true;
         } else {
-            
+
             if (isOperator && isOperatorLast) {
                 display.value = display.value.slice(0, -1);
             }
@@ -53,15 +53,19 @@ function appendToDisplay(input) {
 }
 
 function clearDisplay() {
-    display.value = "0";
+    display.value = "";
     lastActionWasCalculate = false;
     isOperatorLast = false;
+}
+
+function isMathExpression(input) {
+    return /[\d+\-*/()%]/.test(input);
 }
 
 function calculate() {
     const inputValue = display.value;
 
-    
+
 
     if (inputValue === setCode) {
         document.getElementById("calculator").style.display = "none";
@@ -70,12 +74,23 @@ function calculate() {
         return;
     }
 
-    database.ref('messages/' + inputValue).once('value').then(function (snapshot) {
-        if (snapshot.exists()) {
-            display.value = snapshot.val();
-            return;
+    if (inputValue.includes('.')) {
+        try {
+            let expression = inputValue.replace(/%/g, '*0.01*');
+            display.value = eval(expression);
+            lastActionWasCalculate = true;
+            isOperatorLast = false;
+        } catch (error) {
+            display.value = "Error";
+            lastActionWasCalculate = true;
+            isOperatorLast = false;
         }
-        else {
+    } else if (isMathExpression) {
+        database.ref('messages/' + inputValue).once('value').then(function (snapshot) {
+            if (snapshot.exists()) {
+                display.value = snapshot.val();
+                return;
+            }
             try {
                 let expression = inputValue.replace(/%/g, '*0.01*');
                 display.value = eval(expression);
@@ -86,9 +101,10 @@ function calculate() {
                 lastActionWasCalculate = true;
                 isOperatorLast = false;
             }
-        }
-    });
-    lastActionWasCalculate = true;
+        });
+        lastActionWasCalculate = true;
+    }
+
 }
 
 function adminSetMessage() {
@@ -106,7 +122,7 @@ function adminSetMessage() {
             }
         });
     } else {
-        alert("Enter Date of Birth and Message too");
+        alert("Enter code and Message too");
     }
 }
 
@@ -122,13 +138,17 @@ function viewMessage() {
     const birthday = document.getElementById("userBirthdayinput").value;
     const messageOutput = document.getElementById("messageOutput");
 
-    database.ref('messages/' + birthday).once('value').then(function (snapshot) {
-        if (snapshot.exists()) {
-            messageOutput.textContent = snapshot.val();
-        } else {
-            messageOutput.textContent = "Hey Buddy, No message set for you...";
-        }
-    });
+    if (birthday) {
+        database.ref('messages/' + birthday).once('value').then(function (snapshot) {
+            if (snapshot.exists()) {
+                messageOutput.textContent = snapshot.val();
+            } else {
+                messageOutput.textContent = "Hey Buddy, No message set for you...";
+            }
+        });
+    } else {
+        alert("Enter the code");
+    }
 }
 
 function backSpace() {
