@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const equatBtn = document.getElementById('equal-btn');
     const outerBlock = document.getElementById('outblock');
     const display = document.getElementById('display');
+    const adminBlock = document.getElementById('admin');
+    const adminBtn = document.getElementsByClassName('msg-btn');
+    const inputFields = [
+        { input: document.getElementById('adminBirthdayInput'), tooltip: document.getElementById('adminInputTooltip') },
+        { input: document.getElementById('userBirthdayinput'), tooltip: document.getElementById('userInputTooltip') }
+    ];
 
 
     const savedTheme = localStorage.getItem('theme');
@@ -18,9 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         equatBtn.classList.add(savedTheme);
         display.classList.add(savedTheme);
         themeToggle.classList.add(savedTheme);
+        adminBlock.classList.add(savedTheme);
 
         Array.from(operetorBtn).forEach(btn => btn.classList.add(savedTheme));
         Array.from(themeText).forEach(text => text.classList.add('c'));
+        Array.from(adminBlock).forEach(btn => btn.classList.add(savedTheme));
 
         if (savedTheme === 'light') {
             themeToggle.classList.add('shrink');
@@ -33,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    
+
 
     window.onload = function () {
         setTimeout(() => {
@@ -53,9 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
             equatBtn.classList.add('l');
             display.classList.add('l');
             themeToggle.classList.add('l');
+            adminBlock.classList.add('l');
 
 
             Array.from(operetorBtn).forEach(btn => btn.classList.add('l'));
+            Array.from(adminBtn).forEach(btn => btn.classList.add('l'));
             Array.from(themeText).forEach(text => text.classList.add('c'));
 
             themeToggle.classList.add('shrink');
@@ -69,8 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
             equatBtn.classList.remove('l');
             display.classList.remove('l');
             themeToggle.classList.remove('l');
+            adminBlock.classList.remove('l');
 
             Array.from(operetorBtn).forEach(btn => btn.classList.remove('l'));
+            Array.from(adminBtn).forEach(btn => btn.classList.remove('l'));
             Array.from(themeText).forEach(text => text.classList.add('c'));
 
             themeToggle.classList.add('shrink');
@@ -78,4 +90,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const validChars = /^[0-9+\-*/%]*$/;
+
+    // Function to validate input
+    function validInput(event, tooltip) {
+        const inputValue = event.target.value;
+
+        if (validChars.test(inputValue)) {
+            // If input is valid, remove invalid class and hide the tooltip
+            event.target.classList.remove('invalid-input');
+            tooltip.classList.add('hide')
+            tooltip.style.display = 'none'; // Hide tooltip
+        } else {
+            // If input is invalid, add invalid class and show the tooltip
+            event.target.classList.add('invalid-input');
+            tooltip.classList.remove('hide')
+            tooltip.style.display = 'inline-block'; // Show tooltip
+
+            // Remove the last invalid character
+            event.target.value = inputValue.slice(0, -1);
+
+            setTimeout(function () {
+                event.target.classList.remove('invalid-input');
+                tooltip.classList.add('hide')
+            }, 1000);
+        }
+    }
+
+    // Convert inputFields array to an array of DOM elements
+    Array.from(inputFields).forEach(function (field) {
+        if (field.input) {
+            // Correctly reference field.input when adding event listener
+            field.input.addEventListener('input', function (event) {
+                validInput(event, field.tooltip);
+            });
+        } else {
+            console.error('Input field not found for: ', field);
+        }
+    });
 });

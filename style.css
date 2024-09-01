@@ -67,6 +67,22 @@ body.l{
     #equal-btn:hover{
         background: hsl(60, 2%, 66%);
     }
+    .operator-btn.l:hover {
+        background: rgb(52, 157, 188);
+        background: linear-gradient(128deg, rgb(72, 198, 237) 0%, rgb(134, 73, 191) 100%);
+    }
+    #equal-btn.l:hover {
+        background: rgb(123, 207, 222);
+        background: linear-gradient(128deg, rgba(123, 207, 222, 1) 0%, rgb(130, 128, 222) 100%);
+    }
+    button.l:hover{
+        background: rgb(90,162,202);
+        background: linear-gradient(108deg, rgb(87, 149, 182) 0%, rgba(175,129,215,1) 100%);
+    }
+    .msg-btn.l:hover{
+        background: rgb(225, 138, 176);
+        background: linear-gradient(231deg, rgb(136, 84, 105) 0%, rgb(86, 116, 151) 100%);
+}
 }
 
 #outblock{
@@ -265,17 +281,25 @@ body.l{
 #admin{
     width: 300px;
     justify-content: center;
-    /* text-align: center; */
     background:rgb(68, 68, 68);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
+#admin.l {
+        background: rgb(238, 174, 202);
+        background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        transition: background-color 0.5s ease, color 0.5s ease;
+        
+}
+
 #admin input, #admin textarea {
     width: 300px;
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
+    border: none;
 }
 
 .msg-btn{
@@ -283,7 +307,10 @@ body.l{
     font-size: 1rem;
     width: 85px;
     height: 30px;
-    /* background-color: rgb(90, 105, 105); */
+}
+.msg-btn.l{
+    background: rgb(225, 138, 176);
+    background: linear-gradient(231deg, rgb(105, 60, 79) 0%, rgb(151, 188, 231) 100%);
 }
 button{
     width: 60px;
@@ -297,14 +324,9 @@ button{
     outline: none;
 }
 
-button.l{
+.msg-btn.l:active {
     background: rgb(101, 184, 230);
-    background: linear-gradient(306deg, rgba(101, 184, 230, 1) 0%, rgba(175, 129, 215, 1) 100%);font-size: 2rem;
-}
-
-button.l:hover{
-    background: rgb(90,162,202);
-    background: linear-gradient(108deg, rgb(87, 149, 182) 0%, rgba(175,129,215,1) 100%);
+    background: linear-gradient(306deg, rgb(126, 199, 238) 0%, rgb(116, 87, 142) 100%);
 }
 
 button.l:active{
@@ -339,11 +361,6 @@ button:focus,:active{
     background: linear-gradient(128deg, rgba(42, 142, 160, 1) 0%, rgba(118, 68, 166, 1) 100%);
 }
 
-.operator-btn.l:hover {
-    background: rgb(53,176,198);
-    background: linear-gradient(128deg, rgba(53,176,198,1) 0%, rgba(151,87,213,1) 100%);
-}
-
 .operator-btn.l:active {
     background: rgb(36,177,202);
     background: linear-gradient(128deg, rgba(36,177,202,1) 0%, rgba(139,61,215,1) 100%);
@@ -361,14 +378,11 @@ button:focus,:active{
 
 #equal-btn.l {
     height: 210%;
-    background: rgb(150, 213, 224);
-    background: linear-gradient(128deg, rgba(150, 213, 224, 1) 0%, rgba(153, 152, 230, 1) 100%);
+    background: rgb(91, 168, 182);
+    background: linear-gradient(128deg, rgba(150, 213, 224, 1) 0%, rgb(88, 87, 172) 100%);
 }
 
-#equal-btn.l:hover {
-    background: rgb(123, 207, 222);
-    background: linear-gradient(128deg, rgba(123, 207, 222, 1) 0%, rgba(122, 121, 220, 1) 100%);
-}
+
 #equal-btn.l:active {
     background: rgb(108, 209, 227);
     background: linear-gradient(128deg, rgba(108, 209, 227, 1) 0%, rgba(111, 109, 234, 1) 100%);
@@ -417,3 +431,30 @@ p{
     padding: 10px;
 
 }
+.invalid-input{
+    outline: 1px  rgb(255, 0, 0);
+    box-shadow: 0 0 15px rgb(255, 0, 0);
+}
+.inputTooltip {
+    position: absolute;
+    background-color: #f99c9c;
+    width: 150px;
+    color: #1f1d1d;
+    padding: 5px;
+    border-radius:0 4px 4px 4px;
+    font-size: 13px;
+    display: none;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.inputTooltip.hide{
+    opacity: 0;
+    visibility: hidden;
+}
+.textarea{
+    resize: none;
+}
+.textarea::-webkit-scrollbar{
+    display: none;
+}
+/* Positioning and visibility for the tooltip */

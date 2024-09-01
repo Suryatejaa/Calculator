@@ -14,7 +14,7 @@
 </head>
 <body>
     <div id="container">
-        <div id="outblock">
+        <div id="outblock" style="display: block;">
             <span>'99' will take you to other side of this calculator<span>
         </div>
         <div id="calculator" style="display: block;">
@@ -51,28 +51,17 @@
     <div id="admin" style="display: none;">
         <h1>Give Message:</h1>
         <input type="text" id="adminBirthdayInput" placeholder="What's the date?">
-        <textarea id="adminMessageInput" placeholder="Give the Message"></textarea>
+        <span class="inputTooltip" id="adminInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
+        <textarea id="adminMessageInput" placeholder="Give the Message" class="textarea"></textarea>
         <button onclick="adminSetMessage()" class="msg-btn">Gooo..</button>
         <h1>View Message</h1>
         <input type="text" id="userBirthdayinput" placeholder="What's the date?" />
+        <span class="inputTooltip" id="userInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
         <button onclick="viewMessage()" class="msg-btn">Read</button><br>
         <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
         <p id="messageOutput"></p>
     </div>
 
-    <div id="login" style="display: none;">
-        <div id="signInSection">
-            <input type="text" id="existingUser" placeholder="Username">
-            <input type="password" id="existingUserPass" placeholder="Password">
-            <button onclick="signIn()">Sign In</button>
-        </div>
-        <div id="signUpSection">
-            <input type="text" id="newUser" placeholder="New Username">
-            <input type="password" id="newUserPass" placeholder="New Password">
-            <button onclick="signUp()">Sign Up</button>
-        </div>
-        <button onclick="closeLoginSection()">Close Login Section</button>
-    </div>
 
     <script src="/theme.js"></script>
     <script src="index1.js"></script>

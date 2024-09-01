@@ -75,16 +75,17 @@ function calculate() {
             display.value = snapshot.val();
             return;
         }
-
-        try {
-            let expression = inputValue.replace(/%/g, '*0.01*');
-            display.value = eval(expression);
-            lastActionWasCalculate = true;
-            isOperatorLast = false;
-        } catch (error) {
-            display.value = "Error";
-            lastActionWasCalculate = true;
-            isOperatorLast = false;
+        else {
+            try {
+                let expression = inputValue.replace(/%/g, '*0.01*');
+                display.value = eval(expression);
+                lastActionWasCalculate = true;
+                isOperatorLast = false;
+            } catch (error) {
+                display.value = "Error";
+                lastActionWasCalculate = true;
+                isOperatorLast = false;
+            }
         }
     });
     lastActionWasCalculate = true;
