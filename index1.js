@@ -1,4 +1,7 @@
 // Initialize Firebase
+//import { evaluate } from './node_modules/mathjs/lib/esm/index.js';
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyB2HRfN-hVJgtAZqAG-k2Ot5bTc0prvpVE",
     authDomain: "calculator-surya.firebaseapp.com",
@@ -21,13 +24,17 @@ database.ref("List/" + "Targets").set({
 const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
-const setCode = "22-08-2001";
+const setCode = "99";
 const operators = '+-*/%';
 
 function appendToDisplay(input) {
     requestAnimationFrame(() => {
 
         const isOperator = operators.includes(input);
+
+        if (isAwaitingPasscode && display.value.length >= 4) {
+            return;
+        }
 
         if ((display.value === '' || lastActionWasCalculate) && !isOperatorLast && !'+-*/%'.includes(input)) {
             display.value = input;
@@ -51,20 +58,25 @@ function appendToDisplay(input) {
         }
     });
 }
-
+const headerText = document.querySelector('.welcome');
 function clearDisplay() {
     display.value = "";
     lastActionWasCalculate = false;
     isOperatorLast = false;
+    headerText.innerHTML = "Not just <br> A Calculator...";
 }
 
 function isMathExpression(input) {
     return /[\d+\-*/()%]/.test(input);
 }
 
+let isAwaitingPasscode = false;
+let currentUCode = '';
+let changeHeaderTextFun = false
+
 function calculate() {
     const inputValue = display.value;
-
+    const headerText = document.querySelector('.welcome');
 
 
     if (inputValue === setCode) {
@@ -86,38 +98,96 @@ function calculate() {
             isOperatorLast = false;
         }
     } else if (isMathExpression) {
-        database.ref('messages/' + inputValue).once('value').then(function (snapshot) {
-            if (snapshot.exists()) {
-                display.value = snapshot.val();
-                return;
-            }
-            try {
-                let expression = inputValue.replace(/%/g, '*0.01*');
-                display.value = eval(expression);
-                lastActionWasCalculate = true;
-                isOperatorLast = false;
-            } catch (error) {
-                display.value = "Error";
-                lastActionWasCalculate = true;
-                isOperatorLast = false;
-            }
-        });
-        lastActionWasCalculate = true;
-    }
 
+        if (!isAwaitingPasscode) {
+            database.ref('messages/' + inputValue).once('value').then(function (snapshot) {
+                if (snapshot.exists()) {
+
+                    headerText.innerHTML = "What's the <br> pCode";
+                    currentUCode = inputValue;
+                    isAwaitingPasscode = true;
+                    display.value = '';
+                } else {
+                    try {
+                        let expression = inputValue.replace(/%/g, '*0.01*');
+                        display.value = math.evaluate(expression);
+                        lastActionWasCalculate = true;
+                        isOperatorLast = false;
+                    } catch (error) {
+                        display.value = "Error";
+                        lastActionWasCalculate = true;
+                        isOperatorLast = false;
+                    }
+                    headerText.innerHTML = "Not just <br> A Calculator...";
+                }
+            });
+        } else {
+            const pCode = inputValue;
+
+            database.ref('messages/' + currentUCode).once('value').then(function (snapshot) {
+                const data = snapshot.val();
+                if (data.pCode === pCode) {
+                    if (Date.now() < data.expiry) {
+                        display.value = data.message;
+                        headerText.innerHTML = "Message:";
+
+                        isAwaitingPasscode = false
+                        changeHeaderTextFun = true
+
+
+                    } else {
+                        display.value = "Message expired";
+                        headerText.innerHTML = "Message expired";
+                        database.ref('messages/' + inputValue).remove();
+                    }
+                } else {
+                    display.value = 'Incorrect pCode';
+                    headerText.innerHTML = "Try <br> Again!";
+                    isAwaitingPasscode = false
+                    changeHeaderTextFun = true
+
+                }
+                setTimeout(() => {
+                    headerText.innerHTML = "Not just <br> A Calculator...";
+                    isAwaitingPasscode = false;
+                    currentUCode = '';
+                    //display.value = '';
+                }, 1000);
+            });
+
+        }
+
+    };
+    lastActionWasCalculate = true;
 }
 
+// function changeHeaderText() {
+//     const headerText = document.querySelector('.welcome')
+//     headerText.innerHTML = "Not just <br> A Calculator...";
+//     isAwaitingPasscode = false;
+//     currentUCode = '';
+//     display.value = '';
+// }
+
 function adminSetMessage() {
-    const birthday = document.getElementById("adminBirthdayInput").value;
+    const uCode = document.getElementById("adminBirthdayInput").value;
+    const pCode = document.getElementById("adminpCode").value;
     const message = document.getElementById("adminMessageInput").value;
 
-    if (birthday && message) {
-        database.ref('messages/' + birthday).set(message, function (error) {
+
+    if (uCode && pCode && message) {
+        const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
+        database.ref('messages/' + uCode).set({
+            pCode: pCode,
+            message: message,
+            expiry: expiryTime
+        }, function (error) {
             if (error) {
                 alert("Message could not be set: " + error.message);
             } else {
                 alert("Message set successfully!");
                 document.getElementById("adminBirthdayInput").value = '';
+                document.getElementById("adminpCode").value = '';
                 document.getElementById("adminMessageInput").value = '';
             }
         });
@@ -130,24 +200,36 @@ function closeAdminSection() {
     document.getElementById("admin").style.display = "none";
     document.getElementById("calculator").style.display = "block";
     document.getElementById("outblock").style.display = "block";
+    messageOutput.textContent = "";
     clearDisplay();
 
 }
+const messageOutput = document.getElementById("messageOutput");
 
 function viewMessage() {
-    const birthday = document.getElementById("userBirthdayinput").value;
-    const messageOutput = document.getElementById("messageOutput");
+    const uCode = document.getElementById("userBirthdayinput").value;
+    const pCode = document.getElementById("userpCode").value;
 
-    if (birthday) {
-        database.ref('messages/' + birthday).once('value').then(function (snapshot) {
+    if (uCode && pCode) {
+        database.ref('messages/' + uCode).once('value').then(function (snapshot) {
             if (snapshot.exists()) {
-                messageOutput.textContent = snapshot.val();
+                const data = snapshot.val();
+                if (data.pCode === pCode) {
+                    if (Date.now() < data.expiry) {
+                        messageOutput.textContent = data.message;
+                    } else {
+                        messageOutput.textContent = "Message has expired.";
+                        database.ref('messages/' + uCode).remove();
+                    }
+                } else {
+                    messageOutput.textContent = "Incorrect passcode.";
+                }
             } else {
                 messageOutput.textContent = "Hey Buddy, No message set for you...";
             }
         });
     } else {
-        alert("Enter the code");
+        alert("Enter the uCode and pCode");
     }
 }
 
@@ -160,6 +242,10 @@ document.addEventListener("keydown", function (event) {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => {
         const key = event.key;
+
+        // if (changeHeaderTextFun) {
+        //     changeHeaderText()
+        // }
 
         if (key === 'Enter') {
             event.preventDefault(); // Prevent form submission on Enter

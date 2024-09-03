@@ -295,9 +295,9 @@ body.l{
 }
 
 #admin input, #admin textarea {
-    width: 300px;
+    width: 280px;
     padding: 10px;
-    margin: 10px 0;
+    margin: 5px 0;
     border-radius: 5px;
     border: none;
 }
@@ -432,7 +432,7 @@ p{
 
 }
 .invalid-input{
-    outline: 1px  rgb(255, 0, 0);
+    outline: 1px solid rgb(255, 0, 0);
     box-shadow: 0 0 15px rgb(255, 0, 0);
 }
 .inputTooltip {
@@ -440,7 +440,7 @@ p{
     background-color: #f99c9c;
     width: 150px;
     color: #1f1d1d;
-    padding: 5px;
+    padding: 1px;
     border-radius:0 4px 4px 4px;
     font-size: 13px;
     display: none;
@@ -458,3 +458,32 @@ p{
     display: none;
 }
 /* Positioning and visibility for the tooltip */
+/*
+.input-container{
+    position:relative;
+    display:inline-block;
+    width: 100%;
+}
+
+
+.clear-btn{
+    width: 1px;
+    height: 1px;
+    position: relative;
+    left: 280px;
+    top: -28px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    font-size: 16px;
+    line-height: 1;
+    padding:0;
+    z-index: 1;
+}
+
+.clear-btn:hover {
+    color: black;
+    background: transparent;
+}*/

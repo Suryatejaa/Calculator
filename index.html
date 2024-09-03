@@ -7,6 +7,8 @@
     <link rel="icon" href="Elements/calculation.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.js"></script>
+    
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
@@ -50,13 +52,29 @@
     
     <div id="admin" style="display: none;">
         <h1>Give Message:</h1>
-        <input type="text" id="adminBirthdayInput" placeholder="What's the code?">
+        <div class="input-container">
+            <input type="text" id="adminBirthdayInput" placeholder="Give the uCode...">
+            <!-- <button class="clear-btn" onclick="clearInput('adminBirthdayInput')">x</button> -->
+        </div>
         <span class="inputTooltip" id="adminInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
+        <div>
+            <input type="text" id="adminpCode" placeholder="Set the pCode...">
+            <!-- <button class="clear-btn" onclick="clearInput('adminpCode')">x</button> -->
+        </div>
+        <span class="inputTooltip" id="adminpCodeTooltip">Invalid input! Only numbers and + - * / %  and less than 4 characters are allowed.</span>
         <textarea id="adminMessageInput" placeholder="What's Message" class="textarea"></textarea>
         <button onclick="adminSetMessage()" class="msg-btn">Gooo..</button>
         <h1>View Message</h1>
-        <input type="text" id="userBirthdayinput" placeholder="What's the code?" />
+        <div class="input-container">
+            <input type="text" id="userBirthdayinput" placeholder="What's the uCode?" />
+            <!-- <button class="clear-btn" onclick="clearInput('userBirthdayinput')">x</button> -->
+        </div>
         <span class="inputTooltip" id="userInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
+        <div>
+            <input type="text" id="userpCode" placeholder="What's the pCode...">
+            <!-- <button class="clear-btn" onclick="clearInput('userpCode')">x</button> -->
+        </div>
+        <span class="inputTooltip" id="userpCodeTooltip">Invalid input! Only numbers and + - * / % and less than 4 characters are allowedare allowed.</span>
         <button onclick="viewMessage()" class="msg-btn">Read</button><br>
         <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
         <p id="messageOutput"></p>
@@ -64,10 +82,15 @@
 
 
     <script src="/theme.js"></script>
-    <script src="index1.js"></script>
+    <script type="module" src="index1.js"></script>
     
     <script>
         document.getElementById("display").focus();
+    </script>
+    <script>
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+        }
     </script>
 </body>
 </html>
