@@ -56,6 +56,8 @@ function appendToDisplay(input) {
                 lastActionWasCalculate = false;
             }
         }
+
+        display.scrollTop = display.scrollHeight;
     });
 }
 const headerText = document.querySelector('.welcome');
@@ -63,16 +65,31 @@ function clearDisplay() {
     display.value = "";
     lastActionWasCalculate = false;
     isOperatorLast = false;
-    headerText.innerHTML = "Not just <br> A Calculator...";
+    headerText.innerHTML = "itz Not just <br> A Calculator...";
 }
 
 function isMathExpression(input) {
     return /[\d+\-*/()%]/.test(input);
 }
 
+function clear99BlockInputs() {
+
+    document.getElementById("adminBirthdayInput").value = '';
+    document.getElementById("userBirthdayinput").value = '';
+    document.getElementById("adminpCode").value = '';
+    document.getElementById("userpCode").value = '';
+   // document.getElementById("messageoutput").value = '';
+}
+
 let isAwaitingPasscode = false;
 let currentUCode = '';
-let changeHeaderTextFun = false
+let changeHeaderTextFun = false;
+
+const calculator = document.getElementById("calculator");
+const admin = document.getElementById("admin");
+const outblock = document.getElementById("outblock");
+
+
 
 function calculate() {
     const inputValue = display.value;
@@ -80,9 +97,10 @@ function calculate() {
 
 
     if (inputValue === setCode) {
-        document.getElementById("calculator").style.display = "none";
-        document.getElementById("admin").style.display = "block";
-        document.getElementById("outblock").style.display = "none";
+        calculator.classList.add('hide')
+        outblock.classList.add('hide')
+        admin.classList.add('show')
+        clear99BlockInputs();
         return;
     }
 
@@ -118,7 +136,7 @@ function calculate() {
                         lastActionWasCalculate = true;
                         isOperatorLast = false;
                     }
-                    headerText.innerHTML = "Not just <br> A Calculator...";
+                    headerText.innerHTML = "itz Not just <br> A Calculator...";
                 }
             });
         } else {
@@ -129,10 +147,11 @@ function calculate() {
                 if (data.pCode === pCode) {
                     if (Date.now() < data.expiry) {
                         display.value = data.message;
-                        headerText.innerHTML = "Message:";
+                        displayMessage(document.getElementById('display'),data.message)
+                        headerText.innerHTML = "Here's U R <br> Message:";
 
-                        isAwaitingPasscode = false
-                        changeHeaderTextFun = true
+                        isAwaitingPasscode = false;
+                        changeHeaderTextFun = true;
 
 
                     } else {
@@ -143,12 +162,12 @@ function calculate() {
                 } else {
                     display.value = 'Incorrect pCode';
                     headerText.innerHTML = "Try <br> Again!";
-                    isAwaitingPasscode = false
-                    changeHeaderTextFun = true
+                    isAwaitingPasscode = false;
+                    changeHeaderTextFun = true;
 
                 }
                 setTimeout(() => {
-                    headerText.innerHTML = "Not just <br> A Calculator...";
+                    headerText.innerHTML = "itz Not just <br> A Calculator...";
                     isAwaitingPasscode = false;
                     currentUCode = '';
                     //display.value = '';
@@ -161,6 +180,8 @@ function calculate() {
     lastActionWasCalculate = true;
 }
 
+
+
 // function changeHeaderText() {
 //     const headerText = document.querySelector('.welcome')
 //     headerText.innerHTML = "Not just <br> A Calculator...";
@@ -168,6 +189,8 @@ function calculate() {
 //     currentUCode = '';
 //     display.value = '';
 // }
+
+
 
 function adminSetMessage() {
     const uCode = document.getElementById("adminBirthdayInput").value;
@@ -197,18 +220,60 @@ function adminSetMessage() {
 }
 
 function closeAdminSection() {
-    document.getElementById("admin").style.display = "none";
-    document.getElementById("calculator").style.display = "block";
-    document.getElementById("outblock").style.display = "block";
+    
+    calculator.classList.remove('hide');
+    outblock.classList.remove('hide')
+    admin.classList.remove('show');
+
     messageOutput.textContent = "";
     clearDisplay();
 
 }
-const messageOutput = document.getElementById("messageOutput");
+
+function displayMessage(element, message) {
+    //const messageOutput = document.getElementById("messageOutput");
+    element.textContent = message;
+    element.scrollTop = 0;
+
+    let scrollInterval;
+    const scrollSpeed = 25;
+    const scrollStep = 1;
+    let isUserIntracting = false;
+
+    function startScrolling() {
+        scrollInterval = setInterval(() => {
+            if (!isUserIntracting && element.scrollTop < element.scrollHeight - element.clientHeight) {
+                element.scrollTop += scrollStep;
+            } else {
+                clearInterval(scrollInterval);
+            }
+        }, scrollSpeed);
+    }
+    
+    function detectUser() {
+        isUserIntracting = true
+        clearInterval(scrollInterval)
+    }
+
+    
+    element.addEventListener('mousedown', detectUser);
+    element.addEventListener('touchstart', detectUser)
+    element.addEventListener('wheel', detectUser)
+    element.addEventListener('keydown', detectUser)
+    //element.addEventListener('scroll', detectUser)
+   
+    element.addEventListener('mouseup', ()=> isUserIntracting=false);
+    element.addEventListener('touchend', ()=> isUserIntracting=false);
+
+    startScrolling();
+}
+
+
 
 function viewMessage() {
     const uCode = document.getElementById("userBirthdayinput").value;
     const pCode = document.getElementById("userpCode").value;
+    const messageOutput = document.getElementById("messageOutput");
 
     if (uCode && pCode) {
         database.ref('messages/' + uCode).once('value').then(function (snapshot) {
@@ -216,7 +281,9 @@ function viewMessage() {
                 const data = snapshot.val();
                 if (data.pCode === pCode) {
                     if (Date.now() < data.expiry) {
-                        messageOutput.textContent = data.message;
+                        displayMessage(messageOutput, data.message);
+                        //messageOutput.textContent = data.message;
+                        //messageOutput.scrollTop = messageOutput.scrollHeight;
                     } else {
                         messageOutput.textContent = "Message has expired.";
                         database.ref('messages/' + uCode).remove();

@@ -28,7 +28,7 @@ body.l{
     }
     #outblock{
         max-width: 320px;
-        display: block;
+        /* display: block; */
         padding-left: 40px;
         padding-right: 40px;
         font-size: 10px;
@@ -50,7 +50,7 @@ body.l{
     }
     #outblock{
         max-width: 320px;
-        display: block;
+        /* display: block; */
         font-size: 10px;
     }
     #themebtn{
@@ -202,11 +202,12 @@ body.l{
 #display{
     width: 100%;
     padding: 0px;
-    font-size: 2rem;
+    height: 100px;
+    font-size: 1.7rem;
     text-align: right;
     border: none;
     background-color:  hsl(60, 1%, 25%);
-    overflow-y: scroll;
+    overflow-y: auto;
     word-wrap: break-word;
     resize: none;
 }
@@ -401,19 +402,19 @@ button:focus,:active{
     background-color: hsl(0, 0%, 52%);
 }
 
-#Message{
-    width: 400px;
-    height: 50vh;
+#Message, p{
+    /* width: 400px; */
+    max-height: 100px;
     justify-content: left;
     text-align: left;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color:rgba(168, 162, 107, 0.727);
-    overflow-y: scroll;
+    overflow-y: auto;
     word-wrap: break-word;
-    resize: none;
-    
+    resize: none; 
+    position: relative;
 }
-#Message::-webkit-scrollbar{
+#Message,p::-webkit-scrollbar{
     display: none;
 }
 h2{
@@ -429,7 +430,6 @@ p{
     background-color: bisque;
     height: 100%;
     padding: 10px;
-
 }
 .invalid-input{
     outline: 1px solid rgb(255, 0, 0);
@@ -457,6 +457,32 @@ p{
 .textarea::-webkit-scrollbar{
     display: none;
 }
+
+.admin-transition{
+    opacity: 0; 
+    visibility: hidden;
+    display: none;
+    transition: opacity 5s ease, visibility 5 ease;
+}
+
+.admin-transition.show{
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
+.caltrans{
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    transition: opacity 5s ease, visibility 5 ease;
+}
+.caltrans.hide{
+    opacity: 0;
+    visibility: hidden;
+    display: none;   
+}
+
 /* Positioning and visibility for the tooltip */
 /*
 .input-container{
