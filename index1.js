@@ -78,7 +78,7 @@ function clear99BlockInputs() {
     document.getElementById("userBirthdayinput").value = '';
     document.getElementById("adminpCode").value = '';
     document.getElementById("userpCode").value = '';
-   // document.getElementById("messageoutput").value = '';
+    // document.getElementById("messageoutput").value = '';
 }
 
 let isAwaitingPasscode = false;
@@ -97,9 +97,9 @@ function calculate() {
 
 
     if (inputValue === setCode) {
-        calculator.classList.add('hide')
-        outblock.classList.add('hide')
-        admin.classList.add('show')
+        calculator.classList.add('hide');
+        outblock.classList.add('hide');
+        admin.classList.add('show');
         clear99BlockInputs();
         return;
     }
@@ -147,7 +147,7 @@ function calculate() {
                 if (data.pCode === pCode) {
                     if (Date.now() < data.expiry) {
                         display.value = data.message;
-                        displayMessage(document.getElementById('display'),data.message)
+                        displayMessage(document.getElementById('display'), data.message);
                         headerText.innerHTML = "Here's U R <br> Message:";
 
                         isAwaitingPasscode = false;
@@ -220,9 +220,9 @@ function adminSetMessage() {
 }
 
 function closeAdminSection() {
-    
+
     calculator.classList.remove('hide');
-    outblock.classList.remove('hide')
+    outblock.classList.remove('hide');
     admin.classList.remove('show');
 
     messageOutput.textContent = "";
@@ -249,21 +249,29 @@ function displayMessage(element, message) {
             }
         }, scrollSpeed);
     }
-    
-    function detectUser() {
-        isUserIntracting = true
-        clearInterval(scrollInterval)
+
+    function detectUser(event) {
+        isUserIntracting = true;
+        clearInterval(scrollInterval);
+
+        if (event.type === 'touchstart') {
+            event.preventDefault();
+        }
     }
 
-    
+    function allowUserIntreraction(event) {
+        isUserIntracting = false;
+        event.preventDefault();
+    }
+
     element.addEventListener('mousedown', detectUser);
-    element.addEventListener('touchstart', detectUser)
-    element.addEventListener('wheel', detectUser)
-    element.addEventListener('keydown', detectUser)
+    element.addEventListener('touchstart', detectUser, { passive: false }); 
+    element.addEventListener('wheel', detectUser);
+    element.addEventListener('keydown', detectUser);
     //element.addEventListener('scroll', detectUser)
-   
-    element.addEventListener('mouseup', ()=> isUserIntracting=false);
-    element.addEventListener('touchend', ()=> isUserIntracting=false);
+
+    element.addEventListener('mouseup', allowUserIntreraction);
+    element.addEventListener('touchend', allowUserIntreraction, { passive: false });
 
     startScrolling();
 }
