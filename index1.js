@@ -261,7 +261,7 @@ function displayMessage(element, message) {
 
     function allowUserIntreraction(event) {
         isUserIntracting = false;
-        event.preventDefault();
+        //event.preventDefault();
     }
 
     element.addEventListener('mousedown', detectUser);
