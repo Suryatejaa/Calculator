@@ -254,9 +254,9 @@ function displayMessage(element, message) {
         isUserIntracting = true;
         clearInterval(scrollInterval);
 
-        if (event.type === 'touchstart') {
-            event.preventDefault();
-        }
+        // if (event.type === 'touchstart') {
+        //     event.preventDefault();
+        // }
     }
 
     function allowUserIntreraction(event) {
