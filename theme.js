@@ -11,10 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminBlock = document.getElementById('admin');
     const adminBtn = document.getElementsByClassName('msg-btn');
     const inputFields = [
-        { input: document.getElementById('adminBirthdayInput'), tooltip: document.getElementById('adminInputTooltip'), type:'general' },
+        { input: document.getElementById('adminBirthdayInput'), tooltip: document.getElementById('adminInputTooltip'), type: 'general' },
         { input: document.getElementById('userBirthdayinput'), tooltip: document.getElementById('userInputTooltip'), type: 'general' },
         { input: document.getElementById('adminpCode'), tooltip: document.getElementById('adminpCodeTooltip'), type: 'passcode' },
         { input: document.getElementById('userpCode'), tooltip: document.getElementById('userpCodeTooltip'), type: 'passcode' },
+        { input: document.getElementById('adminMessageInput'), tooltip: document.getElementById('textareaTooltip'), type: 'message' },
 
     ];
 
@@ -103,12 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (validChars.test(inputValue)) {
             // If input is valid, remove invalid class and hide the tooltip
             event.target.classList.remove('invalid-input');
-            tooltip.classList.add('hide')
+            tooltip.classList.add('hide');
             tooltip.style.display = 'none'; // Hide tooltip
         } else {
             // If input is invalid, add invalid class and show the tooltip
             event.target.classList.add('invalid-input');
-            tooltip.classList.remove('hide')
+            tooltip.classList.remove('hide');
             tooltip.style.display = 'inline-block'; // Show tooltip
 
             // Remove the last invalid character
@@ -116,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(function () {
                 event.target.classList.remove('invalid-input');
-                tooltip.classList.add('hide')
-        
+                tooltip.classList.add('hide');
+
             }, 1000);
         }
     }
@@ -142,11 +143,23 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(function () {
                 event.target.classList.remove('invalid-input');
                 tooltip.classList.add('hide');
-                
+
             }, 1000);
         }
     }
 
+    function messageToottip(event, tooltip) {
+        const inputValue = event.target.value
+        
+        event.target.classList.add('valid-input')
+        tooltip.classList.remove('hide')
+        tooltip.style.display = "inline-block"
+        
+        setTimeout(function () {
+            event.target.classList.remove('valid-input')
+            tooltip.classList.add('hide')
+        },1000)
+    }
 
 
     // Convert inputFields array to an array of DOM elements
@@ -154,12 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (field.input) {
             // Correctly reference field.input when adding event listener
             field.input.addEventListener('input', function (event) {
+
                 if (field.type == 'passcode') {
                     validPCode(event, field.tooltip);
                 }
-                else {
+                else if (field.type == 'general'){
                     validInput(event, field.tooltip);
-                }   
+                }
+                else if(field.type == 'message') {
+                    messageToottip(event, field.tooltip);
+                }
             });
         } else {
             console.error('Input field not found for: ', field);
@@ -169,4 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearInput(inputId) {
         document.getElementById(inputId).value = '';
     }
+
+    const textareaTooltip = document.getElementById('adminMessageInput');
+    const tooltip = document.getElementById('textareaTooltip');
+
+    textareaTooltip.addEventListener('input', function () {
+        tooltip.classList.add('show');
+    });
 });

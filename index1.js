@@ -89,6 +89,22 @@ const calculator = document.getElementById("calculator");
 const admin = document.getElementById("admin");
 const outblock = document.getElementById("outblock");
 
+//showElement('calculator','outblock'); // Ensure calculator is visible
+//showElement('outblock');  
+
+function showElement(...elementIds) {
+    const allelements = ['calculator', 'admin', 'outblock'];
+    allelements.forEach(id => {
+        const element = document.getElementById(id);
+        if (elementIds.includes(id)) {
+            element.classList.add('show');
+            element.classList.remove('hide');
+        } else {
+            element.classList.add('hide');
+            element.classList.remove('show');
+        }
+    });
+}
 
 
 function calculate() {
@@ -100,6 +116,9 @@ function calculate() {
         calculator.classList.add('hide');
         outblock.classList.add('hide');
         admin.classList.add('show');
+
+        //showElement('admin')
+
         clear99BlockInputs();
         return;
     }
@@ -225,6 +244,10 @@ function closeAdminSection() {
     outblock.classList.remove('hide');
     admin.classList.remove('show');
 
+    // showElement('calculator','outblock')
+    // // showElement('outblock')
+    // const admin = document.getElementById('admin');
+    // admin.classList.add('hide')
     messageOutput.textContent = "";
     clearDisplay();
 

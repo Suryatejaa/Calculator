@@ -16,10 +16,10 @@
 </head>
 <body>
     <div id="container">
-        <div id="outblock" class="caltrans">
+        <div id="outblock" class="caltrans" style="display:none;">
             <span>'99' will take you to other side of this calculator<span>
         </div>
-        <div id="calculator" class="caltrans">
+        <div id="calculator" class="caltrans" style="display:none;">
             <div id="header">
             <h1 class="welcome">itz Not just <br> A Calculator...</h1>
             <button id="themebtn"><span class="theme">Theme</span></button>
@@ -50,7 +50,7 @@
         
     </div>
     
-    <div id="admin" class="admin-transition">
+    <div id="admin" class="admin-transition" >
         <h1>Give Message:</h1>
         <div class="input-container">
             <input type="text" id="adminBirthdayInput" placeholder="Give the uCode...">
@@ -63,6 +63,7 @@
         </div>
         <span class="inputTooltip" id="adminpCodeTooltip">Invalid input! Only numbers and + - * / %  and less than 4 characters are allowed.</span>
         <textarea id="adminMessageInput" placeholder="What's the Message" class="textarea"></textarea>
+        <span class="TextTooltip" id="textareaTooltip">Note this message will be deleted post 24 Hours</span>
         <button onclick="adminSetMessage()" class="msg-btn">Gooo..</button>
         <h1>View Message</h1>
         <div class="input-container">

@@ -85,6 +85,10 @@ body.l{
 }
 }
 
+@keyframes gradientAnimation {
+    
+}
+
 #outblock{
     position: relative;
     max-width: 320px;
@@ -435,6 +439,12 @@ p{
     outline: 1px solid rgb(255, 0, 0);
     box-shadow: 0 0 15px rgb(255, 0, 0);
 }
+
+.valid-input {
+    outline: 1px solid rgb(2, 200, 255);
+    box-shadow: 0 0 15px rgb(0, 204, 255);
+}
+
 .inputTooltip {
     position: absolute;
     background-color: #f99c9c;
@@ -447,31 +457,89 @@ p{
     opacity: 1;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
+.TextTooltip {
+    position: absolute;
+    background-color: #b5d4ef;
+    width: 150px;
+    color: #1f1d1d;
+    padding: 1px;
+    border-radius: 0 4px 4px 4px;
+    font-size: 13px;
+    display: none;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
 .inputTooltip.hide{
     opacity: 0;
     visibility: hidden;
 }
+
+.TextTooltip.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .textarea{
     resize: none;
 }
+
+#textarea.show{
+    display: inline-block;
+    opacity: 1;
+    visibility: visible;
+}
+
 .textarea::-webkit-scrollbar{
     display: none;
 }
 
-.admin-transition{
+.admin-transition, .caltrans{
     opacity: 0; 
     visibility: hidden;
     display: none;
-    transition: opacity 5s ease, visibility 5 ease;
+    transition: opacity 5s ease, visibility 5 ease, transform 0.5 ease;
+    transform: scale(0.95);
 }
 
-.admin-transition.show{
+.admin-transition.show, .caltrans.show{
+    opacity: 1;
+    visibility: visible;
+    /* display: block; */
+    transform: scale(1);
+}
+
+#calculator,
+#outblock{
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+#admin{
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+#calculator.hide,
+#outblock.hide,
+#admin.hide {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+#calculator.show,
+#outblock.show,
+#admin.show {
     opacity: 1;
     visibility: visible;
     display: block;
 }
 
-.caltrans{
+/* .caltrans{
     opacity: 1;
     visibility: visible;
     display: block;
@@ -481,7 +549,7 @@ p{
     opacity: 0;
     visibility: hidden;
     display: none;   
-}
+} */
 
 /* Positioning and visibility for the tooltip */
 /*
