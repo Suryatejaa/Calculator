@@ -210,31 +210,87 @@ function calculate() {
 // }
 
 
+function deleteM() {
+    const uCode = document.getElementById("userBirthdayinput").value;
+    const pCode = document.getElementById("userpCode").value;
+    const messageOutput = document.getElementById("messageOutput");
+
+    if (uCode && pCode) {
+        database.ref('messages/' + uCode).once('value').then(function (snapshot) {
+            const data = snapshot.val();
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                if (data.pCode === pCode) {
+                    const confirmDelete = confirm('Are you sure you want to delete this message ?');
+                    if (confirmDelete) {
+
+                        database.ref('messages/' + uCode).remove().then(() => {
+                            alert("Message deleted successfully");
+                            messageOutput.textContent = "";
+
+                        })
+                            .catch(error => {
+                                console.error("Error deleting message:", error);
+                                alert("Error deleting message");
+                            });
+                    }
+                } else {
+                    alert("Incorrect passcode.");
+                }
+            } else {
+                alert(`${uCode} haven't used`);
+            }
+
+        });
+
+    }
+    else {
+        alert("Enter the uCode and pCode");
+    }
+}
 
 function adminSetMessage() {
     const uCode = document.getElementById("adminBirthdayInput").value;
     const pCode = document.getElementById("adminpCode").value;
     const message = document.getElementById("adminMessageInput").value;
-
+    const uCodeTooltip = document.getElementById('adminInputTooltip');
 
     if (uCode && pCode && message) {
-        const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
-        database.ref('messages/' + uCode).set({
-            pCode: pCode,
-            message: message,
-            expiry: expiryTime
-        }, function (error) {
-            if (error) {
-                alert("Message could not be set: " + error.message);
-            } else {
-                alert("Message set successfully!");
-                document.getElementById("adminBirthdayInput").value = '';
-                document.getElementById("adminpCode").value = '';
-                document.getElementById("adminMessageInput").value = '';
+        database.ref('messages/' + uCode).once('value').then(function (snapshot) {
+
+            if (snapshot.exists()) {
+                uCodeTooltip.classList.remove('hide');
+                uCodeTooltip.style.display = 'inline-block';
+                uCodeTooltip.textContent = `${uCode} This uCode already in use, Please try a diffrent one`;
+
+
+                setTimeout(() => {
+                    uCodeTooltip.classList.add('hide');
+                    uCodeTooltip.style.display = 'none';
+                }, 1000);
+            }
+
+            else {
+
+                const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
+                database.ref('messages/' + uCode).set({
+                    pCode: pCode,
+                    message: message,
+                    expiry: expiryTime
+                }, function (error) {
+                    if (error) {
+                        alert("Message could not be set: " + error.message);
+                    } else {
+                        alert("Message set successfully!");
+                        document.getElementById("adminBirthdayInput").value = '';
+                        document.getElementById("adminpCode").value = '';
+                        document.getElementById("adminMessageInput").value = '';
+                    }
+                });
             }
         });
     } else {
-        alert("Enter code and Message too");
+        alert("Enter codes and Message too");
     }
 }
 
@@ -288,7 +344,7 @@ function displayMessage(element, message) {
     }
 
     element.addEventListener('mousedown', detectUser);
-    element.addEventListener('touchstart', detectUser, { passive: false }); 
+    element.addEventListener('touchstart', detectUser, { passive: false });
     element.addEventListener('wheel', detectUser);
     element.addEventListener('keydown', detectUser);
     //element.addEventListener('scroll', detectUser)
@@ -308,6 +364,7 @@ function viewMessage() {
 
     if (uCode && pCode) {
         database.ref('messages/' + uCode).once('value').then(function (snapshot) {
+            const data = snapshot.val();
             if (snapshot.exists()) {
                 const data = snapshot.val();
                 if (data.pCode === pCode) {
@@ -330,6 +387,9 @@ function viewMessage() {
         alert("Enter the uCode and pCode");
     }
 }
+
+
+
 
 function backSpace() {
     display.value = display.value.slice(0, -1);

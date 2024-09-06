@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(function () {
             event.target.classList.remove('valid-input')
             tooltip.classList.add('hide')
-        },1000)
+        },800)
     }
 
 
@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function clearInput(inputId) {
+        alert('Hello')
         document.getElementById(inputId).value = '';
     }
 
