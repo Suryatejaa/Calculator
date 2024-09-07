@@ -78,35 +78,37 @@
     </div>
     
     <div id="admin" class="admin-transition" >
-        <h1>Give Message:</h1>
+        <h1 class="admin-h1">Give Message:</h1>
         <div class="input-container">
             <input type="text" id="adminBirthdayInput" placeholder="Give the uCode...">
-            <!-- <button class="clear-btn" onclick="clearInput('adminBirthdayInput')">x</button> -->
+            <button class="clear-btn" onclick="clearInput('adminBirthdayInput')">x</button>
         </div>
         <span class="inputTooltip" id="adminInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
         <div>
             <input type="text" id="adminpCode" placeholder="Set the pCode...">
-            <!-- <button class="clear-btn" onclick="clearInput('adminpCode')">x</button> -->
+            <button class="clear-btn" onclick="clearInput('adminpCode')">x</button>
         </div>
         <span class="inputTooltip" id="adminpCodeTooltip">Invalid input! Only numbers and + - * / %  and less than 4 characters are allowed.</span>
         <textarea id="adminMessageInput" placeholder="What's the Message" class="textarea"></textarea>
         <span class="TextTooltip" id="textareaTooltip">Note!! This message will be deleted post 24 Hours</span>
         <button onclick="adminSetMessage()" class="msg-btn">Gooo..</button>
         <div id="viewMessage" style="display: block;">
-        <h1>View Message</h1>
+        <h1 class="admin-h1">View Message:</h1>
         <div class="input-container">
             <input type="text" id="userBirthdayinput" placeholder="What's the uCode?" />
-            <!-- <button class="clear-btn" onclick="clearInput('userBirthdayinput')">x</button> -->
+            <button class="clear-btn" onclick="clearInput('userBirthdayinput')">x</button>
         </div>
         <span class="inputTooltip" id="userInputTooltip">Invalid input! Only numbers and + - * / % are allowed.</span>
         <div>
             <input type="text" id="userpCode" placeholder="What's the pCode ?">
-            <!-- <button class="clear-btn" onclick="clearInput('userpCode')">x</button> -->
+            <button class="clear-btn" onclick="clearInput('userpCode')">x</button>
         </div>
         <span class="inputTooltip" id="userpCodeTooltip">Invalid input! Only numbers and + - * / % and less than 4 characters are allowedare allowed.</span>
+        <div id="msg-btn-container">
         <button onclick="viewMessage()" class="msg-btn">Read</button>
         <button onclick="deleteM()" class="msg-btn" style="margin-top: 10px;">Delete</button>
         <button onclick="closeAdminSection()" class="msg-btn" style="margin-top: 10px;">Close</button>
+        </div>
         <p id="messageOutput"></p>
         </div>
     </div>

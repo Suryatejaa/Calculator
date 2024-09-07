@@ -22,7 +22,7 @@ body.l{
         background-size: cover;
     }
     #container{
-        max-width: 300px;
+        max-width: 350px;
         overflow-x  : hidden;
         position: fixed;
     }
@@ -38,6 +38,7 @@ body.l{
         margin-top: 1%;
         margin-right: 1%;
     }
+    
    
 }
 
@@ -49,7 +50,7 @@ body.l{
         background-image: url("Elements/light_horg.jpg");
     }
     #outblock{
-        max-width: 320px;
+        max-width: 400px;
         /* display: block; */
         font-size: 10px;
     }
@@ -91,10 +92,10 @@ body.l{
 
 #outblock{
     position: relative;
-    max-width: 320px;
+    max-width: 350px;
     background-color: hsl(60, 1%, 35%);
     height: 70px;
-    margin-bottom: 10px;
+    margin-bottom: -6px;
     border-radius: 15px 15px 15px 0;
     overflow: hidden;
     align-content: center;
@@ -179,7 +180,8 @@ body.l{
     font-family: Arial, Helvetica, sans-serif;
     background-color: hsl(60, 1%, 35%);
     border-radius: 15px 0 15px 15px;
-    max-width: 320px;
+    max-width: 350px;
+    height: 640px;
     overflow: hidden;
     transition: background-color 0.5s ease;
 }
@@ -206,7 +208,7 @@ body.l{
 #display{
     width: 100%;
     padding: 0px;
-    height: 100px;
+    height: 120px;
     font-size: 1.7rem;
     text-align: right;
     border: none;
@@ -286,6 +288,7 @@ body.l{
 #admin{
     width: 300px;
     justify-content: center;
+    align-items: center;
     background:rgb(68, 68, 68);
     padding: 40px;
     border-radius: 10px;
@@ -300,26 +303,46 @@ body.l{
 }
 
 #admin input, #admin textarea {
-    width: 280px;
+    width: 300px;
+    height: 23px;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px -10px 5px -12px;
     border-radius: 5px;
     border: none;
 }
+#admin textarea{
+    height: 60px;
+}
 
+.admin-h1{
+    margin-left: -12px;
+    margin-bottom: 2px;
+    font-weight: normal;
+    font-family: 'segoe Ui', 'Courier New', Courier, monospace;
+}
+#msg-btn-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: 100%;
+    gap: 6px;
+}
 .msg-btn{
-    border-radius:10px;
+    border-radius:7px;
     font-size: 1rem;
-    width: 85px;
+    width: 95px;
     height: 30px;
+    margin-left: -10px;
+    margin-right: 20px;
+    margin-top: 9px;
+    box-sizing: border-box;
 }
 .msg-btn.l{
     background: rgb(225, 138, 176);
     background: linear-gradient(231deg, rgb(105, 60, 79) 0%, rgb(151, 188, 231) 100%);
 }
 button{
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50px;
     border:none;
     background-color:  hsl(60, 2%, 80%);
@@ -407,7 +430,7 @@ button:focus,:active{
 }
 
 #Message, p{
-    /* width: 400px; */
+    width: 300px;
     max-height: 100px;
     justify-content: left;
     text-align: left;
@@ -417,6 +440,7 @@ button:focus,:active{
     word-wrap: break-word;
     resize: none; 
     position: relative;
+    margin-left: -10px;
 }
 #Message,p::-webkit-scrollbar{
     display: none;
@@ -448,11 +472,15 @@ p{
 .inputTooltip {
     position: absolute;
     background-color: #f99c9c;
-    width: 150px;
-    color: #1f1d1d;
-    padding: 1px;
+    background: none;
+    width: 300px;
+    color: #e97373;
+    padding: -1px;
+    margin-left: -12px;
+    margin-top: -22px;
     border-radius:0 4px 4px 4px;
-    font-size: 13px;
+    font-size: 10px;
+    font-family: 'segoe Ui', 'Courier New', Courier, monospace;
     display: none;
     opacity: 1;
     transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -461,11 +489,15 @@ p{
 .TextTooltip {
     position: absolute;
     background-color: #b5d4ef;
-    width: 150px;
-    color: #1f1d1d;
+    background: none;
+    width: 300px;
+    color: #5bbae7;
     padding: 1px;
+    margin-left: -12px;
+    margin-top: -10px;
     border-radius: 0 4px 4px 4px;
     font-size: 13px;
+    font-family: 'segoe Ui', 'Courier New', Courier, monospace;
     display: none;
     opacity: 1;
     transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -558,26 +590,28 @@ p{
     display:inline-block;
     width: 100%;
 }
-
+*/
 
 .clear-btn{
     width: 1px;
     height: 1px;
     position: relative;
-    left: 280px;
-    top: -28px;
-    transform: translateY(-50%);
+    left: 290px;
+    top: -35px;
+    /* transform: translateY(-50%); */
     background: transparent;
     border: none;
     cursor: pointer;
     color: gray;
     font-size: 16px;
-    line-height: 1;
-    padding:0;
-    z-index: 1;
+    /* line-height: 1; */
+    padding:0px;
+    /* z-index: 1; */
+    /* margin-top: -5px; */
+    /* margin-bottom: -5px; */
 }
 
 .clear-btn:hover {
     color: black;
     background: transparent;
-}*/
+}
