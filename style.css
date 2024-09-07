@@ -330,7 +330,7 @@ body.l{
     border-radius:7px;
     font-size: 1rem;
     width: 95px;
-    height: 30px;
+    height: 35px;
     margin-left: -10px;
     margin-right: 20px;
     margin-top: 9px;
@@ -472,14 +472,14 @@ p{
 .inputTooltip {
     position: absolute;
     background-color: #f99c9c;
-    background: none;
-    width: 300px;
-    color: #e97373;
-    padding: -1px;
+    /* background: none; */
+    width: 200px;
+    color: #000000;
+    padding: 1px;
     margin-left: -12px;
-    margin-top: -22px;
+    margin-top: -20px;
     border-radius:0 4px 4px 4px;
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'segoe Ui', 'Courier New', Courier, monospace;
     display: none;
     opacity: 1;
@@ -489,14 +489,14 @@ p{
 .TextTooltip {
     position: absolute;
     background-color: #b5d4ef;
-    background: none;
-    width: 300px;
-    color: #5bbae7;
-    padding: 1px;
+    /* background: none; */
+    width: 200px;
+    color: #000000;
+    padding: 2.5px;
     margin-left: -12px;
-    margin-top: -10px;
+    margin-top: -8px;
     border-radius: 0 4px 4px 4px;
-    font-size: 13px;
+    font-size: 12px;
     font-family: 'segoe Ui', 'Courier New', Courier, monospace;
     display: none;
     opacity: 1;
@@ -551,8 +551,8 @@ p{
 
 #admin{
     display: none;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
 }
 
 #calculator.hide,
