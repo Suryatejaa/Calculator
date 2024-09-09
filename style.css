@@ -215,7 +215,7 @@ body.l{
     font-size: 1.7rem;
     text-align: right;
     border: none;
-    color: #fff;
+    color: #ffffff;
     background-color:  hsl(60, 1%, 25%);
     overflow-y: auto;
     word-wrap: break-word;
@@ -296,12 +296,16 @@ body.l{
 #admin{
     width: 300px;
     justify-content: center;
-    color: #fff;
+    color: #ffffff;
     align-items: center;
     background:rgb(68, 68, 68);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#messageOutput{
+    color:#000000
 }
 
 #admin.l {
@@ -560,8 +564,8 @@ p{
 
 #admin{
     display: none;
-    opacity: 1;
-    visibility: visible;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #calculator.hide,

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminBlock = document.getElementById('admin');
     const adminBtn = document.getElementsByClassName('msg-btn');
     const welcome = document.getElementById('welcome')
+    const messageOutput = document.getElementById('messageOutput')
     const inputFields = [
         { input: document.getElementById('adminBirthdayInput'), tooltip: document.getElementById('adminInputTooltip'), type: 'general' },
         { input: document.getElementById('userBirthdayinput'), tooltip: document.getElementById('userInputTooltip'), type: 'general' },
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggle.classList.add('l');
             adminBlock.classList.add('l');
             welcome.classList.add('l');
+            messageOutput.classList.add('l')
 
 
             Array.from(operetorBtn).forEach(btn => btn.classList.add('l'));
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggle.classList.remove('l');
             adminBlock.classList.remove('l');
             welcome.classList.remove('l');
+            messageOutput.classList.remove('l')
 
             Array.from(operetorBtn).forEach(btn => btn.classList.remove('l'));
             Array.from(adminBtn).forEach(btn => btn.classList.remove('l'));
