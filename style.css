@@ -296,6 +296,7 @@ body.l{
 #admin{
     width: 300px;
     justify-content: center;
+    color: #fff;
     align-items: center;
     background:rgb(68, 68, 68);
     padding: 40px;
@@ -307,7 +308,7 @@ body.l{
         background: rgb(238, 174, 202);
         background: linear-gradient(313deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
         transition: background-color 0.5s ease, color 0.5s ease;
-        
+        color: #000000;
 }
 
 #admin input, #admin textarea {
@@ -487,7 +488,7 @@ p{
     margin-left: -12px;
     margin-top: -20px;
     border-radius:0 4px 4px 4px;
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'segoe Ui', 'Courier New', Courier, monospace;
     display: none;
     opacity: 1;
@@ -605,8 +606,8 @@ p{
     height: 1px;
     position: relative;
     left: 290px;
-    top: -35px;
-    /* transform: translateY(-50%); */
+    top: -37px;
+    /* tran4form: translateY(-50%); */
     background: transparent;
     border: none;
     cursor: pointer;

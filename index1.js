@@ -267,7 +267,7 @@ function adminSetMessage() {
                 setTimeout(() => {
                     uCodeTooltip.classList.add('hide');
                     uCodeTooltip.style.display = 'none';
-                }, 1000);
+                }, 1500);
             }
 
             else {

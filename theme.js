@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.target.classList.remove('invalid-input');
                 tooltip.classList.add('hide');
 
-            }, 1000);
+            }, 1500);
         }
     }
 
