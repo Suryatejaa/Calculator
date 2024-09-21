@@ -124,6 +124,50 @@
         function clearInput(inputId) {
             document.getElementById(inputId).value = '';
         }
+        // function deleteM() {
+        //         const uCode = document.getElementById("userBirthdayinput").value;
+        //         const pCode = document.getElementById("userpCode").value;
+        //         const messageOutput = document.getElementById("messageOutput");
+
+        //         if (uCode && pCode) {
+        //             database.ref('messages/' + uCode).once('value').then(function (snapshot) {
+        //                 const data = snapshot.val();
+        //                 if (snapshot.exists()) {
+        //                     const data = snapshot.val();
+        //                     if (data.pCode === pCode) {
+                                
+        //                         const dCode = prompt("Please enter the dCode (deletion code) to delete this message:");
+        //                         if(dCode === data.dCode){
+        //                         const confirmDelete = confirm('Are you sure you want to delete this message ?');
+        //                         if (confirmDelete) {
+
+        //                             database.ref('messages/' + uCode).remove().then(() => {
+        //                                 alert("Message deleted successfully");
+        //                                 messageOutput.textContent = "";
+
+        //                             })
+        //                                 .catch(error => {
+        //                                     console.error("Error deleting message:", error);
+        //                                     alert("Error deleting message");
+        //                                 });
+        //                         } else{
+        //                             alert("Incorrect dCode.")
+        //                         }
+                            
+        //                     } else {
+        //                         alert("Incorrect passcode.");
+        //                     }
+        //                 } else {
+        //                     alert(`${uCode} haven't used`);
+        //                 }
+
+        //             });
+                
+        //         }
+        //         else {
+        //             alert("Enter the uCode and pCode");
+        //         }
+        //     }
         function deleteM() {
                 const uCode = document.getElementById("userBirthdayinput").value;
                 const pCode = document.getElementById("userpCode").value;
@@ -133,35 +177,35 @@
                     database.ref('messages/' + uCode).once('value').then(function (snapshot) {
                         const data = snapshot.val();
                         if (snapshot.exists()) {
-                            const data = snapshot.val();
                             if (data.pCode === pCode) {
-                                const confirmDelete = confirm('Are you sure you want to delete this message ?');
-                                if (confirmDelete) {
-
-                                    database.ref('messages/' + uCode).remove().then(() => {
-                                        alert("Message deleted successfully");
-                                        messageOutput.textContent = "";
-
-                                    })
-                                        .catch(error => {
+                                // Prompt for dCode before deleting
+                                const dCode = prompt("Please enter the dCode (deletion code) to delete this message:");
+                                if (dCode === data.dCode) {
+                                    const confirmDelete = confirm('Are you sure you want to delete this message?');
+                                    if (confirmDelete) {
+                                        database.ref('messages/' + uCode).remove().then(() => {
+                                            alert("Message deleted successfully");
+                                            messageOutput.textContent = "";
+                                        }).catch(error => {
                                             console.error("Error deleting message:", error);
                                             alert("Error deleting message");
                                         });
+                                    }
+                                } else {
+                                    alert("Incorrect dCode. Unable to delete the message.");
                                 }
                             } else {
                                 alert("Incorrect passcode.");
                             }
                         } else {
-                            alert(`${uCode} haven't used`);
+                            alert(`${uCode} doesn't exist.`);
                         }
-
                     });
-
-                }
-                else {
+                } else {
                     alert("Enter the uCode and pCode");
                 }
             }
+
     </script>
 </body>
 </html>

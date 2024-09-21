@@ -277,11 +277,18 @@ function adminSetMessage() {
 
             else {
 
+                const dCode = prompt("Set dCode that require while deleting:");
+                if (!dCode) {
+                    alert("dCode is required to set the message.");
+                    return;
+                }
+
                 const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
                 database.ref('messages/' + uCode).set({
                     pCode: pCode,
                     message: message,
-                    expiry: expiryTime
+                    expiry: expiryTime,
+                    dCode: dCode
                 }, function (error) {
                     if (error) {
                         alert("Message could not be set: " + error.message);
