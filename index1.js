@@ -25,6 +25,7 @@ const display = document.getElementById("display");
 let lastActionWasCalculate = false;
 let isOperatorLast = false;
 const setCode = "99";
+const todoApp = "88";
 const operators = '+-*/%';
 
 function appendToDisplay(input) {
@@ -121,6 +122,10 @@ function calculate() {
 
         clear99BlockInputs();
         return;
+    }
+
+    if (inputValue === todoApp) {
+        window.location.href = 'https://suryatejaa.github.io/TodoApp/';
     }
 
     if (inputValue.includes('.')) {
