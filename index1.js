@@ -26,6 +26,7 @@ let lastActionWasCalculate = false;
 let isOperatorLast = false;
 const setCode = "99";
 const todoApp = "88";
+const flipClock = '00'
 const operators = '+-*/%';
 
 function appendToDisplay(input) {
@@ -126,6 +127,10 @@ function calculate() {
 
     if (inputValue === todoApp) {
         window.location.href = 'https://suryatejaa.github.io/TodoApp/';
+    }
+
+    if (inputValue === flipClock) {
+        window.location.href = 'https://suryatejaa.github.io/FlipClock/';
     }
 
     if (inputValue.includes('.')) {
